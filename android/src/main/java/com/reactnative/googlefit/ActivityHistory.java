@@ -103,7 +103,7 @@ public class ActivityHistory {
                 WritableMap map = Arguments.createMap();
                 map.putDouble("start",start);
                 map.putDouble("end",end);
-                map.putInt("activityName", activityType);
+                map.putString("activityName", activityName);
                 String deviceName = "";
                 String sourceId = "";
                 boolean isTracked = true;
@@ -118,7 +118,11 @@ public class ActivityHistory {
                             }
                         } catch (Exception e) {
                         }
-                        sourceId = dataPoint.getOriginalDataSource().getAppPackageName();
+                        if (sourceId.isEmpty()
+                                && dataPoint.getOriginalDataSource() != null
+                                && dataPoint.getOriginalDataSource().getAppPackageName() != null) {
+                            sourceId = dataPoint.getOriginalDataSource().getAppPackageName();
+                        }
                         if (dataPoint.getOriginalDataSource().getStreamName().equalsIgnoreCase("user_input")) {
                             isTracked = false;
                         }
@@ -133,14 +137,6 @@ public class ActivityHistory {
                                     break;
                                 case CALORIES_FIELD_NAME:
                                     map.putDouble(fieldName, dataPoint.getValue(field).asFloat());
-//                                case LOW_LATITUDE:
-//                                    map.putDouble(fieldName, dataPoint.getValue(field).asFloat());
-//                                case HIGH_LATITUDE:
-//                                    map.putDouble(fieldName, dataPoint.getValue(field).asFloat());
-//                                case LOW_LONGITUDE:
-//                                    map.putDouble(fieldName, dataPoint.getValue(field).asFloat());
-//                                case HIGH_LONGITUDE:
-//                                    map.putDouble(fieldName, dataPoint.getValue(field).asFloat());
                                 default:
                                     Log.w(TAG, "don't specified and handled: " + fieldName);
                             }
