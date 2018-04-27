@@ -101,7 +101,7 @@ public class BodyHistory {
 
     public boolean save(ReadableMap sample) {
         this.Dataset = createDataForRequest(
-                this.dataType,    // for height, it would be DataType.TYPE_HEIGHT
+                DataType.TYPE_WEIGHT,    // for height, it would be DataType.TYPE_HEIGHT
                 DataSource.TYPE_RAW,
                 sample.getDouble("value"),                  // weight in kgs, height in metrs
                 (long)sample.getDouble("date"),              // start time
