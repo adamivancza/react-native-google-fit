@@ -308,6 +308,15 @@ public class GoogleFitModule extends ReactContextBaseJavaModule implements Lifec
         }
     }
 
+    @ReactMethod
+    public void saveOneStep(Callback errorCallback, Callback successCallback) {
+        try {
+            successCallback.invoke(mGoogleFitManager.getSavingSteps().saveOneStep());
+        } catch (IllegalViewOperationException e) {
+            errorCallback.invoke(e.getMessage());
+        }
+    }
+
     private boolean isAvailableCheck() {
         PackageManager pm = mReactContext.getPackageManager();
         try {

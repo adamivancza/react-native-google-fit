@@ -325,6 +325,16 @@ class RNGoogleFit {
       })
   }
 
+  saveOneStep(callback) { // saves one step
+      googleFit.saveOneStep(
+          (msg) => {
+          callback(msg,false);
+  },
+      (res) => {
+          callback(false,res);
+      });
+  }
+
   isEnabled(callback) { // true if permission granted
     googleFit.isEnabled(
       (msg) => {
