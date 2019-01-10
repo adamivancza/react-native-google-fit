@@ -299,6 +299,16 @@ class RNGoogleFit {
         });
     }
 
+    saveOneStep(callback) { // true if GoogleFit installed
+        googleFit.saveOneStep(
+            (msg) => {
+            callback(msg,false);
+    },
+        (res) => {
+            callback(false,res);
+        });
+    }
+
     isEnabled(callback) { // true if permission granted
         googleFit.isEnabled(
             (msg) => {

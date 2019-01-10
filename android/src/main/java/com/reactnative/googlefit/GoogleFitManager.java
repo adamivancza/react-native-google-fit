@@ -56,6 +56,7 @@ public class GoogleFitManager implements
     private StepSensor stepSensor;
     private RecordingApi recordingApi;
     private ActivityHistory activityHistory;
+    private SavingSteps savingSteps;
 
     private static final String TAG = "RNGoogleFit";
 
@@ -74,6 +75,7 @@ public class GoogleFitManager implements
         this.calorieHistory = new CalorieHistory(mReactContext, this);
         this.recordingApi = new RecordingApi(mReactContext, this);
         this.activityHistory = new ActivityHistory(mReactContext, this);
+        this.savingSteps = new SavingSteps(mReactContext, this, activity);
         //        this.stepSensor = new StepSensor(mReactContext, activity);
     }
 
@@ -101,6 +103,10 @@ public class GoogleFitManager implements
         return distanceHistory;
     }
 
+    public SavingSteps getSavingSteps() {
+        return savingSteps;
+    }
+
     public void resetAuthInProgress()
     {
         if (!isAuthorized()) {
@@ -119,6 +125,7 @@ public class GoogleFitManager implements
                 .addApi(Fitness.RECORDING_API)
                 .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ))
                 .addScope(new Scope(Scopes.FITNESS_BODY_READ_WRITE))
+                .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
                 .addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
                 .addConnectionCallbacks(
                     new GoogleApiClient.ConnectionCallbacks() {
