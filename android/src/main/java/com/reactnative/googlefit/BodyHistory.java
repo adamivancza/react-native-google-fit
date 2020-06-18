@@ -237,7 +237,7 @@ public class BodyHistory {
             // most recent sample is not an option), so use average value to maximise the match between values
             // returned here and values as reported by Google Fit app
             if (this.dataType == DataType.TYPE_WEIGHT) {
-                stepMap.putDouble("value", dp.getValue(Field.FIELD_AVERAGE).asFloat());
+                stepMap.putDouble("value", dp.getValue(Field.FIELD_WEIGHT).asFloat());
             } else {
                 stepMap.putDouble("value", dp.getValue(Field.FIELD_HEIGHT).asFloat());
             }
